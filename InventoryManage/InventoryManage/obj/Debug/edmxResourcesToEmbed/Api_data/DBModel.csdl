@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="InventoryDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="barcodedata">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Barcode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Rid" Type="Int64" />
+    <Property Name="Rcol" Type="Int64" />
+    <Property Name="pid" Type="Int64" />
+    <NavigationProperty Name="product" Relationship="Self.FK_barcodedata_product" FromRole="barcodedata" ToRole="product" />
+    <NavigationProperty Name="Rack" Relationship="Self.FK_barcodedata_Rack" FromRole="barcodedata" ToRole="Rack" />
+    <NavigationProperty Name="Rackcolumn" Relationship="Self.FK_barcodedata_Rackcolumn" FromRole="barcodedata" ToRole="Rackcolumn" />
+  </EntityType>
+  <EntityType Name="color">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="colorcode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="color1" Relationship="Self.FK_color_color" FromRole="color" ToRole="color1" />
+    <NavigationProperty Name="color2" Relationship="Self.FK_color_color" FromRole="color1" ToRole="color" />
+    <NavigationProperty Name="Rackcolumns" Relationship="Self.FK_Rackcolumn_color" FromRole="color" ToRole="Rackcolumn" />
+  </EntityType>
+  <EntityType Name="product">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="productcode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="barcodedatas" Relationship="Self.FK_barcodedata_product" FromRole="product" ToRole="barcodedata" />
+  </EntityType>
+  <EntityType Name="Rack">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="weightid" Type="Int64" />
+    <NavigationProperty Name="barcodedatas" Relationship="Self.FK_barcodedata_Rack" FromRole="Rack" ToRole="barcodedata" />
+    <NavigationProperty Name="weight" Relationship="Self.FK_Rack_weight" FromRole="Rack" ToRole="weight" />
+  </EntityType>
+  <EntityType Name="Rackcolumn">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="colorid" Type="Int64" />
+    <Property Name="sizeid" Type="Int64" />
+    <NavigationProperty Name="barcodedatas" Relationship="Self.FK_barcodedata_Rackcolumn" FromRole="Rackcolumn" ToRole="barcodedata" />
+    <NavigationProperty Name="color" Relationship="Self.FK_Rackcolumn_color" FromRole="Rackcolumn" ToRole="color" />
+    <NavigationProperty Name="size" Relationship="Self.FK_Rackcolumn_size" FromRole="Rackcolumn" ToRole="size" />
+  </EntityType>
+  <EntityType Name="size">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Range" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Rackcolumns" Relationship="Self.FK_Rackcolumn_size" FromRole="size" ToRole="Rackcolumn" />
+    <NavigationProperty Name="size1" Relationship="Self.FK_size_size" FromRole="size" ToRole="size1" />
+    <NavigationProperty Name="size2" Relationship="Self.FK_size_size" FromRole="size1" ToRole="size" />
+  </EntityType>
+  <EntityType Name="weight">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="weightcode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Racks" Relationship="Self.FK_Rack_weight" FromRole="weight" ToRole="Rack" />
+  </EntityType>
+  <Association Name="FK_barcodedata_product">
+    <End Role="product" Type="Self.product" Multiplicity="0..1" />
+    <End Role="barcodedata" Type="Self.barcodedata" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="product">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="barcodedata">
+        <PropertyRef Name="pid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_barcodedata_Rack">
+    <End Role="Rack" Type="Self.Rack" Multiplicity="0..1" />
+    <End Role="barcodedata" Type="Self.barcodedata" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rack">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="barcodedata">
+        <PropertyRef Name="Rid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_barcodedata_Rackcolumn">
+    <End Role="Rackcolumn" Type="Self.Rackcolumn" Multiplicity="0..1" />
+    <End Role="barcodedata" Type="Self.barcodedata" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rackcolumn">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="barcodedata">
+        <PropertyRef Name="Rcol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_color_color">
+    <End Role="color" Type="Self.color" Multiplicity="1" />
+    <End Role="color1" Type="Self.color" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="color">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="color1">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Rackcolumn_color">
+    <End Role="color" Type="Self.color" Multiplicity="0..1" />
+    <End Role="Rackcolumn" Type="Self.Rackcolumn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="color">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Rackcolumn">
+        <PropertyRef Name="colorid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Rack_weight">
+    <End Role="weight" Type="Self.weight" Multiplicity="0..1" />
+    <End Role="Rack" Type="Self.Rack" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="weight">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Rack">
+        <PropertyRef Name="weightid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Rackcolumn_size">
+    <End Role="size" Type="Self.size" Multiplicity="0..1" />
+    <End Role="Rackcolumn" Type="Self.Rackcolumn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="size">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Rackcolumn">
+        <PropertyRef Name="sizeid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_size_size">
+    <End Role="size" Type="Self.size" Multiplicity="1" />
+    <End Role="size1" Type="Self.size" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="size">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="size1">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="InventoryDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="barcodedatas" EntityType="Self.barcodedata" />
+    <EntitySet Name="colors" EntityType="Self.color" />
+    <EntitySet Name="products" EntityType="Self.product" />
+    <EntitySet Name="Racks" EntityType="Self.Rack" />
+    <EntitySet Name="Rackcolumns" EntityType="Self.Rackcolumn" />
+    <EntitySet Name="sizes" EntityType="Self.size" />
+    <EntitySet Name="weights" EntityType="Self.weight" />
+    <AssociationSet Name="FK_barcodedata_product" Association="Self.FK_barcodedata_product">
+      <End Role="product" EntitySet="products" />
+      <End Role="barcodedata" EntitySet="barcodedatas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_barcodedata_Rack" Association="Self.FK_barcodedata_Rack">
+      <End Role="Rack" EntitySet="Racks" />
+      <End Role="barcodedata" EntitySet="barcodedatas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_barcodedata_Rackcolumn" Association="Self.FK_barcodedata_Rackcolumn">
+      <End Role="Rackcolumn" EntitySet="Rackcolumns" />
+      <End Role="barcodedata" EntitySet="barcodedatas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_color_color" Association="Self.FK_color_color">
+      <End Role="color" EntitySet="colors" />
+      <End Role="color1" EntitySet="colors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Rackcolumn_color" Association="Self.FK_Rackcolumn_color">
+      <End Role="color" EntitySet="colors" />
+      <End Role="Rackcolumn" EntitySet="Rackcolumns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Rack_weight" Association="Self.FK_Rack_weight">
+      <End Role="weight" EntitySet="weights" />
+      <End Role="Rack" EntitySet="Racks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Rackcolumn_size" Association="Self.FK_Rackcolumn_size">
+      <End Role="size" EntitySet="sizes" />
+      <End Role="Rackcolumn" EntitySet="Rackcolumns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_size_size" Association="Self.FK_size_size">
+      <End Role="size" EntitySet="sizes" />
+      <End Role="size1" EntitySet="sizes" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

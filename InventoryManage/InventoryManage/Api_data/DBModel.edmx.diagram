@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="24e3bc6a663a4fb587f72f9f8217ce92" Name="Diagram1">
+        <EntityTypeShape EntityType="InventoryDBModel.barcodedata" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryDBModel.color" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryDBModel.product" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryDBModel.Rack" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryDBModel.Rackcolumn" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryDBModel.size" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryDBModel.weight" Width="1.5" PointX="0.75" PointY="9.125" IsExpanded="true" />
+        <AssociationConnector Association="InventoryDBModel.FK_barcodedata_product" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryDBModel.FK_barcodedata_Rack" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryDBModel.FK_barcodedata_Rackcolumn" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryDBModel.FK_color_color" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryDBModel.FK_Rackcolumn_color" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryDBModel.FK_Rack_weight" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryDBModel.FK_Rackcolumn_size" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryDBModel.FK_size_size" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="InventoryDBModelStoreContainer" CdmEntityContainer="InventoryDBEntities">
+    <EntitySetMapping Name="barcodedatas">
+      <EntityTypeMapping TypeName="InventoryDBModel.barcodedata">
+        <MappingFragment StoreEntitySet="barcodedata">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+          <ScalarProperty Name="Rid" ColumnName="Rid" />
+          <ScalarProperty Name="Rcol" ColumnName="Rcol" />
+          <ScalarProperty Name="pid" ColumnName="pid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="colors">
+      <EntityTypeMapping TypeName="InventoryDBModel.color">
+        <MappingFragment StoreEntitySet="color">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="colorcode" ColumnName="colorcode" />
+          <ScalarProperty Name="description" ColumnName="description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="products">
+      <EntityTypeMapping TypeName="InventoryDBModel.product">
+        <MappingFragment StoreEntitySet="product">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="productcode" ColumnName="productcode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Racks">
+      <EntityTypeMapping TypeName="InventoryDBModel.Rack">
+        <MappingFragment StoreEntitySet="Rack">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="weightid" ColumnName="weightid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rackcolumns">
+      <EntityTypeMapping TypeName="InventoryDBModel.Rackcolumn">
+        <MappingFragment StoreEntitySet="Rackcolumn">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="colorid" ColumnName="colorid" />
+          <ScalarProperty Name="sizeid" ColumnName="sizeid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sizes">
+      <EntityTypeMapping TypeName="InventoryDBModel.size">
+        <MappingFragment StoreEntitySet="size">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Range" ColumnName="Range" />
+          <ScalarProperty Name="description" ColumnName="description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="weights">
+      <EntityTypeMapping TypeName="InventoryDBModel.weight">
+        <MappingFragment StoreEntitySet="weight">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="weightcode" ColumnName="weightcode" />
+          <ScalarProperty Name="description" ColumnName="description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
